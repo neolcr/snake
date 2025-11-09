@@ -22,7 +22,7 @@ fn draw_canvas(grid: Res<GridSize>, mut commands: Commands) {
         Transform::from_xyz(0.0, 0.0, -2.0),
     ));
 
-    // Canvas (inner playable area / grid)
+    //canvas
     let board_size = Vec2::new(
         grid.size.x as f32 * grid.pixels as f32,
         grid.size.y as f32 * grid.pixels as f32,
@@ -37,46 +37,17 @@ fn draw_canvas(grid: Res<GridSize>, mut commands: Commands) {
         Transform::from_xyz(0.0, 0.0, -1.0),
     ));
 
-    // Optional: outline the canvas with a thin border so it's visually distinct
-    let border_thickness = 4.0;
-    let half_w = board_size.x / 2.0;
-    let half_h = board_size.y / 2.0;
-    let border_color = Color::WHITE;
-
-    // Top border
-    commands.spawn((
-        Sprite {
-            color: border_color,
-            custom_size: Some(Vec2::new(board_size.x, border_thickness)),
-            ..Default::default()
-        },
-        Transform::from_xyz(0.0, half_h - border_thickness / 2.0, -0.5),
-    ));
-    // Bottom border
-    commands.spawn((
-        Sprite {
-            color: border_color,
-            custom_size: Some(Vec2::new(board_size.x, border_thickness)),
-            ..Default::default()
-        },
-        Transform::from_xyz(0.0, -half_h + border_thickness / 2.0, -0.5),
-    ));
-    // Left border
-    commands.spawn((
-        Sprite {
-            color: border_color,
-            custom_size: Some(Vec2::new(border_thickness, board_size.y)),
-            ..Default::default()
-        },
-        Transform::from_xyz(-half_w + border_thickness / 2.0, 0.0, -0.5),
-    ));
-    // Right border
-    commands.spawn((
-        Sprite {
-            color: border_color,
-            custom_size: Some(Vec2::new(border_thickness, board_size.y)),
-            ..Default::default()
-        },
-        Transform::from_xyz(half_w - border_thickness / 2.0, 0.0, -0.5),
-    ));
+    for x in 0..=grid.size.x {
+        for y in 0..=grid.size.y {
+            let position = GridPosition { x: x, y: y };
+            commands.spawn((
+                Sprite {
+                    color: Color::srgb(210.0 / 255.0, 210.0 / 255.0, 210.0 / 255.0),
+                    custom_size: Some(Vec2::splat(grid.pixels as f32 - 2.0)),
+                    ..Default::default()
+                },
+                Transform::from_translation(grid.to_pixels(position, 1.0))
+            ));
+        }
+    }
 }

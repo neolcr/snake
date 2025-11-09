@@ -6,6 +6,10 @@ pub mod board;
 pub mod camera;
 pub mod shared; // reserved for future shared plugin code
 
+pub mod food;
+pub mod snake;
+pub mod game;
+
 pub struct SharedPlugin;
 impl Plugin for SharedPlugin {
     fn build(&self, app: &mut App){
