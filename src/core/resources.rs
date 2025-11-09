@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use rand::{SeedableRng, rngs::StdRng};
 
 use super::*;
 
@@ -25,6 +26,17 @@ impl GridSize {
             (position.y as f32 + 0.5) * self.pixels as f32 - half_height,
             z,
         )
+    }
+}
+
+#[derive(Resource)]
+pub struct RandomSource {
+    pub rng: StdRng,
+}
+
+impl Default for RandomSource {
+    fn default() -> Self {
+        Self { rng: StdRng::from_entropy() }
     }
 }
 

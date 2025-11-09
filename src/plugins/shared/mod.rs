@@ -1,8 +1,11 @@
-// Empty shared module; remove if unused. Placeholder for future common systems/resources.
-
 use bevy::prelude::*;
+use crate::core::*;
 
-pub struct SharedResourcesPlugin;
-impl Plugin for SharedResourcesPlugin {
-	fn build(&self, _app: &mut App) {}
+pub struct SharedPlugin;
+impl Plugin for SharedPlugin {
+	fn build(&self, app: &mut App) {
+		app
+		.add_message::<GameStartEvent>()
+		.insert_resource(GridSize::default());
+	}
 }

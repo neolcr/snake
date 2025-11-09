@@ -6,6 +6,8 @@ use dotenvy::dotenv;
 mod plugins;
 use plugins::{SharedPlugin, board::BoardPlugin, camera::CameraPlugin};
 
+use crate::plugins::{food::FoodPlugin, game::GamePlugin, snake::SnakePlugin};
+
 fn main() {
     dotenv().ok();
     let game_title = std::env::var("GAME_TITLE").unwrap_or_else(|_| "My Snake Game".to_string());
@@ -20,7 +22,14 @@ fn main() {
             ..default()
         }))
         // Our custom plugins/resources
-        .add_plugins((SharedPlugin, BoardPlugin, CameraPlugin))
+        .add_plugins((
+            SharedPlugin, 
+            BoardPlugin, 
+            CameraPlugin,
+            GamePlugin,
+            SnakePlugin,
+            FoodPlugin
+        ))
         .run();
 
     error!("App is running");

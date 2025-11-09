@@ -10,9 +10,6 @@ pub mod food;
 pub mod snake;
 pub mod game;
 
-pub struct SharedPlugin;
-impl Plugin for SharedPlugin {
-    fn build(&self, app: &mut App){
-        app.insert_resource(GridSize::default());
-    }
-}
+// Re-export the SharedPlugin from the `shared` module so `use plugins::SharedPlugin` picks the one
+// that also registers messages (GameStartEvent) and inserts GridSize.
+pub use shared::SharedPlugin;
