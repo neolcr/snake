@@ -36,7 +36,8 @@ pub struct RandomSource {
 
 impl Default for RandomSource {
     fn default() -> Self {
-        Self { rng: StdRng::from_entropy() }
+        // rand 0.9: use from_os_rng() instead of deprecated/removed from_entropy()
+        Self { rng: StdRng::from_os_rng() }
     }
 }
 

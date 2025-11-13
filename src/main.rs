@@ -8,6 +8,8 @@ use plugins::{SharedPlugin, board::BoardPlugin, camera::CameraPlugin};
 
 use crate::plugins::{food::FoodPlugin, game::GamePlugin, snake::SnakePlugin};
 
+
+// el video tutorial está en el minuto 37:41
 fn main() {
     dotenv().ok();
     let game_title = std::env::var("GAME_TITLE").unwrap_or_else(|_| "My Snake Game".to_string());

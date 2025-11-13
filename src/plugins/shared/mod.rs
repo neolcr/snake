@@ -6,6 +6,7 @@ impl Plugin for SharedPlugin {
 	fn build(&self, app: &mut App) {
 		app
 		.add_message::<GameStartEvent>()
-		.insert_resource(GridSize::default());
+		.insert_resource(GridSize::default())
+		.insert_resource(RandomSource::default());
 	}
 }

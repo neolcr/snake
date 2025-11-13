@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use rand::Rng; // for gen_range
 use crate::{core::*, plugins::snake};
 
 pub struct FoodPlugin;
@@ -23,8 +24,8 @@ fn initialize_food(mut commands: Commands, grid: Res<GridSize>, snake_segments: 
     let occupied_cells: Vec<GridPosition> = snake_segments.iter().copied().collect();
     let mut food_position = GridPosition{x: 0, y: 0};
     loop {
-        let x: u32 = rand.rng.gen_range(0..grid.size.x);
-        let y: u32 = rand.rng.gen_range(0..grid.size.y);
+        let x: u32 = rand.rng.random_range(0..grid.size.x);
+        let y: u32 = rand.rng.random_range(0..grid.size.y);
         if !occupied_cells.iter().any(|pos| pos.x == x && pos.y == y) {
             food_position.x = x;
             food_position.y = y;
