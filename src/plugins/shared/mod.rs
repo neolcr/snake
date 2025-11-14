@@ -7,6 +7,8 @@ impl Plugin for SharedPlugin {
 		app
 		.add_message::<GameStartEvent>()
 		.insert_resource(GridSize::default())
-		.insert_resource(RandomSource::default());
+		.insert_resource(RandomSource::default())
+		.insert_resource(Growth::default())
+		.insert_resource(GameStatus::default());
 	}
 }

@@ -41,3 +41,18 @@ impl Default for RandomSource {
     }
 }
 
+#[derive(Resource, Default)]
+pub struct Growth {
+    pub pending: u32,
+}
+
+#[derive(Resource, Clone, Copy, PartialEq, Eq)]
+pub enum GameStatus {
+    Running,
+    GameOver,
+}
+
+impl Default for GameStatus {
+    fn default() -> Self { GameStatus::Running }
+}
+

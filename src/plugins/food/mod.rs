@@ -51,6 +51,7 @@ fn initialize_food(mut commands: Commands, grid: Res<GridSize>, snake_segments: 
 fn handle_food_collision(
     grid: Res<GridSize>,
     mut rand: ResMut<RandomSource>,
+    mut growth: ResMut<Growth>,
     // Mark disjointness: snake query excludes Food so it can't overlap q_food
     q_snake: Query<(&SnakeSegment, &GridPosition), Without<Food>>,
     mut q_food: Query<(&mut GridPosition, &mut Transform), With<Food>>,
@@ -93,5 +94,7 @@ fn handle_food_collision(
         // Apply
         *food_pos = new_pos;
         food_tf.translation = grid.to_pixels(new_pos, 1.0);
+        // Request growth by 1
+        growth.pending = growth.pending.saturating_add(1);
     }
 }
